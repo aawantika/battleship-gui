@@ -1,28 +1,31 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Border;
 
 public class ControlPanel extends JPanel {
 	private final String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8"};
+	private int[] location;
+	private JButton button;
 	private JComboBox locationX;
 	private JComboBox locationY;
-	private JLabel row;
 	private JLabel column;
-	private JButton button;
-	private int[] location;
+	private JLabel row;
+	private Border emptyBorder;
 
 	public ControlPanel() {
 		setPreferredSize(new Dimension(200, BattleshipPanel.HEIGHT));
 		setBackground(Color.darkGray);
+		emptyBorder = BorderFactory.createEmptyBorder();
 
 		location = new int[2];
-		location[0] = 1;
-		location[1] = 1;
+		location[0] = 10;
+		location[1] = 10;
 
 		row = new JLabel("Row: ");
 		row.setForeground(Color.white);
