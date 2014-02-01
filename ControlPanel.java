@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
 
 public class ControlPanel extends JPanel {
 	private final String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8"};
@@ -17,33 +17,49 @@ public class ControlPanel extends JPanel {
 	private JComboBox locationY;
 	private JLabel column;
 	private JLabel row;
+	private GroupLayout layout;
 
 	public ControlPanel() {
 		setPreferredSize(new Dimension(200, BattleshipPanel.HEIGHT));
 		setBackground(Color.darkGray);
-		setLayout(new BoxLayout(BattleshipPanel.HEIGHT));
 
 		location = new int[2];
 		location[0] = 10;
 		location[1] = 10;
 
+		layout = new GroupLayout(this); 
+		this.setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
 		row = new JLabel("Row: ");
 		row.setForeground(Color.white);
-		row.setFont(row.getFont().deriveFont(20f));
+		row.setFont(row.getFont().deriveFont(16f));
 		locationX = new JComboBox(numbers);
 		locationX.setEditable(false);
-		row.setAlignmentX(LEFT_ALIGNMENT);
-		locationX.setAlignmentX(LEFT_ALIGNMENT);
-		add(row);
-		add(locationX);
 
 		column = new JLabel("Column: ");
 		column.setForeground(Color.white);
-		column.setFont(column.getFont().deriveFont(20f));
+		column.setFont(column.getFont().deriveFont(16f));
 		locationY = new JComboBox(numbers);
 		locationY.setEditable(false);
-		add(column);
-		add(locationY);
+
+		layout.setHorizontalGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addComponent(row)
+                .addComponent(column))
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(locationX)
+                .addComponent(locationY))
+        );
+        layout.setVerticalGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(row)
+                .addComponent(locationX))
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(column)
+                .addComponent(locationY))
+        );
 
 		button = new JButton("Submit");
 		button.addActionListener(new ButtonListener());
