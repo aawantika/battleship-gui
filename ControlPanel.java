@@ -6,7 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Border;
+import javax.swing.border.Border;
+import javax.swing.BoxLayout;
 
 public class ControlPanel extends JPanel {
 	private final String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8"};
@@ -16,12 +17,11 @@ public class ControlPanel extends JPanel {
 	private JComboBox locationY;
 	private JLabel column;
 	private JLabel row;
-	private Border emptyBorder;
 
 	public ControlPanel() {
 		setPreferredSize(new Dimension(200, BattleshipPanel.HEIGHT));
 		setBackground(Color.darkGray);
-		emptyBorder = BorderFactory.createEmptyBorder();
+		setLayout(new BoxLayout(BattleshipPanel.HEIGHT));
 
 		location = new int[2];
 		location[0] = 10;
@@ -32,6 +32,8 @@ public class ControlPanel extends JPanel {
 		row.setFont(row.getFont().deriveFont(20f));
 		locationX = new JComboBox(numbers);
 		locationX.setEditable(false);
+		row.setAlignmentX(LEFT_ALIGNMENT);
+		locationX.setAlignmentX(LEFT_ALIGNMENT);
 		add(row);
 		add(locationX);
 
