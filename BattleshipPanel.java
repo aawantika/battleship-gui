@@ -16,7 +16,7 @@ public class BattleshipPanel extends JPanel {
 	private Timer timer;
 	private Box box;
 	private Box[][] boxes;
-	private boolean initial;
+	private int numOfShipsFound;
 
 	public BattleshipPanel (ControlPanel control) {
 		cPanel = control;
@@ -26,16 +26,14 @@ public class BattleshipPanel extends JPanel {
 		boxes = new Box[8][8];
 		createBoxes(boxes);
 		createBattleship(boxes);
-		initial = true;
+		numOfShipsFound = 0;
 
 		timer = new Timer(100, new TimerListener());
 		timer.start();
 	}
 
 	public void paintComponent(Graphics g) {
-	//***Does not need to be edited
-		super.paintComponent(g); //Call to the super constructor to make sure
-		//all of JPanel's paintComponent stuff is called first
+		super.paintComponent(g);
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				boxes[i][j].draw(g);
@@ -81,7 +79,7 @@ public class BattleshipPanel extends JPanel {
 				boxes[x3][y1].isBattleship();
 				boxes[x4][y1].isBattleship();
 			}
-		} else { //
+		} else { 
 			int x1 = ranDirection.nextInt(8);
 
 			int y1 = ranDirection.nextInt(5);
@@ -99,20 +97,23 @@ public class BattleshipPanel extends JPanel {
 	}
 
 	public void check() {
+		// while (cPanel.getCounter() > -1) {
 		int[] locationXY = cPanel.getLocationXY();
 		int xPos = locationXY[0];
 		int yPos = locationXY[1];
 
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) { 
-				if ((i == xPos) && (j == yPos)) {
-					if (boxes[i][j].getBattleship()) {
-						boxes[i][j].hitBox();
-					} else {
-						boxes[i][j].emptyBox();
-					}
-				}
+		if ((xPos != 10) && (yPos != 10)) {
+			if (boxes[xPos][yPos].getBattleship()) {
+				boxes[xPos][yPos].hitBox();
+			} else {
+				boxes[xPos][yPos].emptyBox();
 			}
+		} 
+		if (cPanel.getCounter() == 0) {
+			cPanel.gameIsOver();
+		}
+		if (numOfShipsFound == 4) {
+			cPanel.userWins();
 		}
 	}
 }
