@@ -1,14 +1,12 @@
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Graphics;
 
 public class Box {
-	private int x, y;
-	private Color c;
 	private boolean battleship;
+	private Color c;
+	private int x, y;
 
-	public Box (int xPos, int yPos) {
+	public Box(int xPos, int yPos) {
 		x = xPos;
 		y = yPos;
 		c = Color.black;
@@ -37,4 +35,8 @@ public class Box {
     public void hitBox() {
         c = Color.yellow;
     }
+
+    public Color getColor() {
+    	return c;
+    } 
 }
