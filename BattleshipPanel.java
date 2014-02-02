@@ -65,40 +65,35 @@ public class BattleshipPanel extends JPanel {
 		Random ranDirection = new Random();
 		int direction =  ranDirection.nextInt(2);
 
-		boxes[2][6].isBattleship();
-		boxes[3][6].isBattleship();
-		boxes[4][6].isBattleship();
-		boxes[5][6].isBattleship();
+		if (direction == 0) {
+			int x1 = ranDirection.nextInt(5);
+			int x2 = x1 + 1;
+			int x3 = x1 + 2;
+			int x4 = x1 + 3;
 
-		// if (direction == 0) {
-		// 	int x1 = ranDirection.nextInt(5);
-		// 	int x2 = x1 + 1;
-		// 	int x3 = x1 + 2;
-		// 	int x4 = x1 + 3;
+			int y1 = ranDirection.nextInt(8);
 
-		// 	int y1 = ranDirection.nextInt(8);
+			for (int i = 0; i < 4; i++) {
+				boxes[x1][y1].isBattleship();
+				boxes[x2][y1].isBattleship();
+				boxes[x3][y1].isBattleship();
+				boxes[x4][y1].isBattleship();
+			}
+		} else { 
+			int x1 = ranDirection.nextInt(8);
 
-		// 	for (int i = 0; i < 4; i++) {
-		// 		boxes[x1][y1].isBattleship();
-		// 		boxes[x2][y1].isBattleship();
-		// 		boxes[x3][y1].isBattleship();
-		// 		boxes[x4][y1].isBattleship();
-		// 	}
-		// } else { 
-		// 	int x1 = ranDirection.nextInt(8);
+			int y1 = ranDirection.nextInt(5);
+			int y2 = y1 + 1;
+			int y3 = y1 + 2;
+			int y4 = y1 + 3;
 
-		// 	int y1 = ranDirection.nextInt(5);
-		// 	int y2 = y1 + 1;
-		// 	int y3 = y1 + 2;
-		// 	int y4 = y1 + 3;
-
-		// 	for (int i = 0; i < 4; i++) {
-		// 		boxes[x1][y1].isBattleship();
-		// 		boxes[x1][y2].isBattleship();
-		// 		boxes[x1][y3].isBattleship();
-		// 		boxes[x1][y4].isBattleship();
-		// 	}
-		// }
+			for (int i = 0; i < 4; i++) {
+				boxes[x1][y1].isBattleship();
+				boxes[x1][y2].isBattleship();
+				boxes[x1][y3].isBattleship();
+				boxes[x1][y4].isBattleship();
+			}
+		}
 	}
 
 	public void checkLocation() {
